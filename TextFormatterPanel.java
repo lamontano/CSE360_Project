@@ -3,6 +3,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class TextFormatterPanel extends JPanel 
 {		
@@ -20,13 +21,15 @@ public class TextFormatterPanel extends JPanel
 	private JLabel resultLabel2;
 	private JLabel resultLabel3;
 	private JLabel resultLabel4;
-	
 	private JLabel resultLabel6;
 	private JLabel resultLabel7;
-	private Change c1;
+	//private TextFormatter T1;
+	//Radio buttons
+	private JRadioButton right, left;
 	private static final int FRAME_WIDTH = 2400;
 	private static final int FRAME_HEIGHT = 3600;
 	private static final int  FIELD_WIDTH = 10;
+
 
 	//----------------------------------------------------------------------------------------------------------
 	//
@@ -39,9 +42,11 @@ public class TextFormatterPanel extends JPanel
 		createPanel();
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		add(panel);
-
 		setBackground(Color.orange);
 		setPreferredSize(new Dimension(300, 500));
+
+		
+
 
 	}
 
@@ -51,7 +56,7 @@ public class TextFormatterPanel extends JPanel
 		
 		panel = new JPanel();
 
-		panel.setLayout(new GridLayout (15,1));
+		panel.setLayout(new GridLayout (17, 1));
 		panel.setBackground(Color.orange);
 		
 		panel.add(title);
@@ -67,6 +72,9 @@ public class TextFormatterPanel extends JPanel
 		panel.add(outputField);
 
 		panel.add(button);
+
+		panel.add(left);
+		panel.add(right);
 		
 		panel.add(resultLabel);
 		
@@ -97,13 +105,21 @@ public class TextFormatterPanel extends JPanel
 	{
 		
 		button = new JButton("Format File");
-
+		right = new JRadioButton("Right Justified");
+		left = new JRadioButton("Left Justified");
+		right.setBackground(Color.orange);
+		left.setBackground(Color.orange);
+	
 		ActionListener listener = new ButtonListener();
 		button.addActionListener(listener);
 		button.setBackground(Color.cyan);
+
+		ActionListener listener1 = new radioButtonListener();
+		right.addActionListener(listener1);
+		left.addActionListener(listener1);
 		
 
-		title = new JLabel("Enter the file name or path to file");
+		title = new JLabel("Enter the file name: ");
 		
 		title1 = new JLabel("Then press " + "\"Format File\"");
 		
@@ -116,27 +132,27 @@ public class TextFormatterPanel extends JPanel
 
 		outputField = new JTextField(FIELD_WIDTH);
 
-		resultLabel = new JLabel("Number of words processed ");
+		resultLabel = new JLabel("Number of words processed: ");
 
-		resultLabel1 = new JLabel("Number of lines ");
+		resultLabel1 = new JLabel("Number of lines: ");
 
-		resultLabel2 = new JLabel("Number of blank lines removed ");
+		resultLabel2 = new JLabel("Number of blank lines removed: ");
 
-		resultLabel3 = new JLabel("Average words per line ");
+		resultLabel3 = new JLabel("Average words per line: ");
 
-		resultLabel4 = new JLabel("Average line length ");
+		resultLabel4 = new JLabel("Average line length: ");
 
 		
 
 		resultLabel6 = new JLabel(" \n ");
 
-		resultLabel7 = new JLabel("Group 5: Jian Kang, Luis Montano, Carlos Paz");
+		resultLabel7 = new JLabel("Group 5: Jian Kang, Luis Montano, Carlos Paz, Krishna Sandeep");
 
-		resultLabel.setText("Numbers of words processed 0");
-		resultLabel1.setText("Number of lines 0");
-		resultLabel2.setText("Number of blank lines removed 0");
-		resultLabel3.setText("Average words per line 0");
-		resultLabel4.setText("Average line lenght 0");
+		resultLabel.setText("Numbers of words processed: 0");
+		resultLabel1.setText("Number of lines: 0");
+		resultLabel2.setText("Number of blank lines removed: 0");
+		resultLabel3.setText("Average words per line: 0");
+		resultLabel4.setText("Average line lenght: 0");
 		
 		
 		
@@ -160,11 +176,12 @@ public class TextFormatterPanel extends JPanel
 
 			if (inputField.getText().isEmpty() && outputField.getText().isEmpty())
 			{
-				resultLabel.setText("Number of words processed " + Integer.toString(0));
-				resultLabel1.setText("Number of lines " + Integer.toString(0));
-				resultLabel2.setText("Number of blank lines removed " + Integer.toString(0));
-				resultLabel3.setText("Average words per line "  + Integer.toString(0));
-				resultLabel4.setText("Average line lenght " + Integer.toString(0));
+				resultLabel.setText("Number of words processed: " + Integer.toString(0));
+				resultLabel1.setText("Number of lines: " + Integer.toString(0));
+				resultLabel2.setText("Number of blank lines removed: " + Integer.toString(0));
+				resultLabel3.setText("Average words per line: "  + Integer.toString(0));
+				resultLabel4.setText("Average line lenght: " + Integer.toString(0));
+				button.setEnabled(false);
 				
 			}
 
@@ -172,6 +189,7 @@ public class TextFormatterPanel extends JPanel
 			{ 
 				in = Integer.parseInt(enterInput);
 				out = Integer.parseInt(getOutput);
+				button.setEnabled(true);
 
                 //Create object from class
 				//t1 = new TextFormatter(in , out);
@@ -191,5 +209,23 @@ public class TextFormatterPanel extends JPanel
 
 		}
 
+	}
+	private class radioButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event1)
+		{
+			Object radioButton = event1.getSource();
+
+			if(radioButton == right )
+			{
+				right = new JRadioButton("Right Justified", true);
+				left = new JRadioButton("Left Justified", false);
+			}
+			else
+			{
+				right = new JRadioButton("Right Justified", false);
+				left = new JRadioButton("Left Justified", true);
+			}
+		}
 	}
 }
