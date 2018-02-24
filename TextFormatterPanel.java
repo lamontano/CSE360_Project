@@ -106,7 +106,7 @@ public class TextFormatterPanel extends JPanel
 		
 		button = new JButton("Format File");
 		right = new JRadioButton("Right Justified");
-		left = new JRadioButton("Left Justified");
+		left = new JRadioButton("Left Justified", true);
 		right.setBackground(Color.orange);
 		left.setBackground(Color.orange);
 	
@@ -132,11 +132,11 @@ public class TextFormatterPanel extends JPanel
 
 		outputField = new JTextField(FIELD_WIDTH);
 
-		resultLabel = new JLabel("Number of words processed: ");
+		resultLabel = new JLabel("# Words processed: ");
 
-		resultLabel1 = new JLabel("Number of lines: ");
+		resultLabel1 = new JLabel("# Lines: ");
 
-		resultLabel2 = new JLabel("Number of blank lines removed: ");
+		resultLabel2 = new JLabel("# Blank lines removed: ");
 
 		resultLabel3 = new JLabel("Average words per line: ");
 
@@ -148,9 +148,9 @@ public class TextFormatterPanel extends JPanel
 
 		resultLabel7 = new JLabel("Group 5: Jian Kang, Luis Montano, Carlos Paz, Krishna Sandeep");
 
-		resultLabel.setText("Numbers of words processed: 0");
-		resultLabel1.setText("Number of lines: 0");
-		resultLabel2.setText("Number of blank lines removed: 0");
+		resultLabel.setText("# Words processed: 0");
+		resultLabel1.setText("# Lines: 0");
+		resultLabel2.setText("# Blank lines removed: 0");
 		resultLabel3.setText("Average words per line: 0");
 		resultLabel4.setText("Average line lenght: 0");
 		
@@ -176,9 +176,9 @@ public class TextFormatterPanel extends JPanel
 
 			if (inputField.getText().isEmpty() && outputField.getText().isEmpty())
 			{
-				resultLabel.setText("Number of words processed: " + Integer.toString(0));
-				resultLabel1.setText("Number of lines: " + Integer.toString(0));
-				resultLabel2.setText("Number of blank lines removed: " + Integer.toString(0));
+				resultLabel.setText("# Words processed: " + Integer.toString(0));
+				resultLabel1.setText("# Lines: " + Integer.toString(0));
+				resultLabel2.setText("# Blank lines removed: " + Integer.toString(0));
 				resultLabel3.setText("Average words per line: "  + Integer.toString(0));
 				resultLabel4.setText("Average line lenght: " + Integer.toString(0));
 				button.setEnabled(false);
@@ -197,9 +197,9 @@ public class TextFormatterPanel extends JPanel
  
 				
 				/*
-				resultLabel.setText("Number of words processed " + Integer.toString());
-				resultLabel1.setText("Number of lines " + Integer.toString());
-				resultLabel2.setText("Number of blank lines removed " + Integer.toString());
+				resultLabel.setText("# Words processed " + Integer.toString());
+				resultLabel1.setText("# Lines " + Integer.toString());
+				resultLabel2.setText("# Blank lines removed " + Integer.toString());
 				resultLabel3.setText("Average words per line " + Integer.toString());
 				resultLabel4.setText("Average line lenght " + Integer.toString());
 				*/
