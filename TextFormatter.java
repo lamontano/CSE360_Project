@@ -5,14 +5,25 @@ public class TextFormatter {
     private static final int COL_WIDTH = 80;
     private Stats stats = new Stats();
 
-    public ArrayList<String> format(String PATH, String direction) {
+    public ArrayList<String> format(String PATH, String outputDirPath, JPanel panel, String direction) {
         ArrayList<String> result = new ArrayList<>();
+        String outputFile = outputDirPath+"/output.txt";
         if (direction.equals("left")) {
-            result = leftJustify(PATH, stats);
+            result = leftJustify(PATH, panel, stats);
         }
         if (direction.equals("right")) {
-            result = rightJustify(PATH, stats);
+            result = rightJustify(PATH, panel, stats);
         }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFile)));
+            for(int i=0;i<result.size();i++){
+                writer.write(result.get(i)+"\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        
         return result;
     }
 
