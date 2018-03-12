@@ -39,6 +39,7 @@ public class TextFormatter {
                     empty_line++;
                     continue;
                 }
+                line = line.replace('\t', ' ');
                 String[] words = line.split(" ");
                 word_cnt += words.length;
 
@@ -167,35 +168,35 @@ public class TextFormatter {
 
 
 
-    public static void main(String[] args) {
-        TextFormatter TF = new TextFormatter();
-        String PATH = "E:\\java\\TextFormatter\\src\\test.txt";
+    // public static void main(String[] args) {
+    //     TextFormatter TF = new TextFormatter();
+    //     String PATH = "/home/ubuntu/eclipse_workspace/cse360/src/input.txt";
 
-        ArrayList<String> left = TF.format(PATH, "left");
-        Stats left_stats = TF.getStats();
-        ArrayList<String> right = TF.format(PATH, "right");
-        Stats right_stats = TF.getStats();
+    //     ArrayList<String> left = TF.format(PATH, "left");
+    //     Stats left_stats = TF.getStats();
+    //     ArrayList<String> right = TF.format(PATH, "right");
+    //     Stats right_stats = TF.getStats();
 
-        for (String line: left) {
-            System.out.println(line);
-        }
-        System.out.println("#### LEFT JUSTIFY ANALYSIS ####");
-        System.out.println(left_stats.words_processed());
-        System.out.println(left_stats.lines_processed());
-        System.out.println(left_stats.empty_liens());
-        System.out.println(left_stats.avg_words_per_line());
-        System.out.println(left_stats.avg_line_length());
+    //     for (String line: left) {
+    //         System.out.println(line);
+    //     }
+    //     System.out.println("#### LEFT JUSTIFY ANALYSIS ####");
+    //     System.out.println(left_stats.words_processed());
+    //     System.out.println(left_stats.lines_processed());
+    //     System.out.println(left_stats.empty_liens());
+    //     System.out.println(left_stats.avg_words_per_line());
+    //     System.out.println(left_stats.avg_line_length());
 
-        System.out.println();
+    //     System.out.println();
 
-        for (String line: right) {
-            System.out.println(line);
-        }
-        System.out.println("#### RIGHT JUSTIFY ANALYSIS ####");
-        System.out.println(right_stats.words_processed());
-        System.out.println(right_stats.lines_processed());
-        System.out.println(right_stats.empty_liens());
-        System.out.println(right_stats.avg_words_per_line());
-        System.out.println(right_stats.avg_line_length());
-    }
+    //     for (String line: right) {
+    //         System.out.println(line);
+    //     }
+    //     System.out.println("#### RIGHT JUSTIFY ANALYSIS ####");
+    //     System.out.println(right_stats.words_processed());
+    //     System.out.println(right_stats.lines_processed());
+    //     System.out.println(right_stats.empty_liens());
+    //     System.out.println(right_stats.avg_words_per_line());
+    //     System.out.println(right_stats.avg_line_length());
+    // }
 }
