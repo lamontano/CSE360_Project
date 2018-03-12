@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 public class TextFormatter {
     private static final int COL_WIDTH = 80;
     private Stats stats = new Stats();
@@ -25,9 +28,11 @@ public class TextFormatter {
         }
         
         return result;
+        
     }
 
-    private ArrayList<String> leftJustify(String PATH, Stats stats) {
+
+    private ArrayList<String> leftJustify(String PATH, JPanel panel, Stats stats) {
         // initialization
         ArrayList<String> lines = new ArrayList<>();
         int free_space = COL_WIDTH;
@@ -45,12 +50,13 @@ public class TextFormatter {
 
             // read line by line
             while ((line = line_reader.readLine()) != null) {
+                line = line.replace('\t', ' ');
+                line = line.replaceAll("\\s+", " ");
                 // split line into words
                 if (line.isEmpty()) {
                     empty_line++;
                     continue;
                 }
-                line = line.replace('\t', ' ');
                 String[] words = line.split(" ");
                 word_cnt += words.length;
 
@@ -90,13 +96,13 @@ public class TextFormatter {
             // update stats
             stats.update(line_cnt, word_cnt, empty_line, total_length);
         } catch (IOException e) {
-            System.err.println(e);
+            JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
         return lines;
     }
 
 
-    private ArrayList<String> rightJustify(String PATH, Stats stats) {
+    private ArrayList<String> rightJustify(String PATH, JPanel panel, Stats stats) {
         // initialization
         ArrayList<String> lines = new ArrayList<>();
         int free_space = COL_WIDTH;
@@ -114,12 +120,13 @@ public class TextFormatter {
 
             // read line by line
             while ((line = line_reader.readLine()) != null) {
+                line = line.replace('\t', ' ');
+                line = line.replaceAll("\\s+", " ");
                 // split line into words
                 if (line.isEmpty()) {
                     empty_line++;
                     continue;
                 }
-                line = line.replace('\t', ' ');
                 String[] words = line.split(" ");
                 word_cnt += words.length;
 
@@ -169,7 +176,7 @@ public class TextFormatter {
             // update stats
             stats.update(line_cnt, word_cnt, empty_line, total_length);
         } catch (IOException e) {
-            System.err.println(e);
+            JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
         return lines;
     }
@@ -177,4 +184,5 @@ public class TextFormatter {
     public Stats getStats() {
         return this.stats;
     }
+
 }
