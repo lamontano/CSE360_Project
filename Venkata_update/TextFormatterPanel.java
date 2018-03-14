@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.event.ActionEvent;
 
 public class TextFormatterPanel extends JPanel {
@@ -122,9 +124,7 @@ public class TextFormatterPanel extends JPanel {
 
 		ActionListener listener1 = new radioButtonListener();
 		right.addActionListener(listener1);
-		right.setBackground(Color.orange);
 		left.addActionListener(listener1);
-		left.setBackground(Color.orange);
 
 		title = new JLabel("Enter the file name: ");
 
@@ -136,6 +136,9 @@ public class TextFormatterPanel extends JPanel {
 		inButton = new JButton("Browse Input file");
 		inButton.addActionListener(new BrowseButtonListener());
 		fileChooser = new JFileChooser();
+		JFileChooser jf = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+		jf.setFileFilter(filter);
 
 		output = new JLabel("Output file");
 		outButton = new JButton("Browse output directory");
