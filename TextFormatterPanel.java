@@ -133,6 +133,8 @@ public class TextFormatterPanel extends JPanel {
         right = new JRadioButton("Right Justified", false);
         left = new JRadioButton("Left Justified", true);
 		ActionListener radio_btn_listener = new radioButtonListener();
+		right.setBackground(Color.orange);
+		left.setBackground(Color.orange);
 		right.addActionListener(radio_btn_listener);
 		left.addActionListener(radio_btn_listener);
 
@@ -168,7 +170,7 @@ public class TextFormatterPanel extends JPanel {
 
 		// group info
 		padding = new JLabel(" \n ");
-        group_members = new JLabel("Group 5: Jian Kang, Luis Montano, Carlos Paz, Venkata Maganti");
+        group_members = new JLabel("Group 5: Jian Kang, Venkata Maganti, Luis Montano, Carlos Paz");
 	}
 
 
