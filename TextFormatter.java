@@ -10,7 +10,8 @@ public class TextFormatter {
 
     public ArrayList<String> format(String PATH, String outputDirPath, JPanel panel, String direction) {
         ArrayList<String> result = new ArrayList<>();
-        String outputFile = outputDirPath+"/output.txt";
+//        String outputFile = outputDirPath+"/output.txt";
+        String outputFile = outputDirPath;
         if (direction.equals("left")) {
             result = leftJustify(PATH, panel, stats);
         }
@@ -18,21 +19,21 @@ public class TextFormatter {
             result = rightJustify(PATH, panel, stats);
         }
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFile)));
-            for(int i=0;i<result.size();i++){
-                writer.write(result.get(i)+"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.err.println(e);
-        }
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFile)));
+			for(int i=0;i<result.size();i++){
+				writer.write(result.get(i)+"\n");
+	        }
+			writer.close();
+		} catch (IOException e) {
+			System.err.println(e);
+		}
         
         return result;
         
     }
 
 
-    private ArrayList<String> leftJustify(String PATH, JPanel panel, Stats stats) {
+	private ArrayList<String> leftJustify(String PATH, JPanel panel, Stats stats) {
         // initialization
         ArrayList<String> lines = new ArrayList<>();
         int free_space = COL_WIDTH;
@@ -50,9 +51,9 @@ public class TextFormatter {
 
             // read line by line
             while ((line = line_reader.readLine()) != null) {
-                line = line.replace('\t', ' ');
-                line = line.replaceAll("\\s+", " ");
                 // split line into words
+            	line = line.replaceAll("\\s+", " ");
+                line = line.replaceAll("\t", " ");
                 if (line.isEmpty()) {
                     empty_line++;
                     continue;
@@ -96,7 +97,7 @@ public class TextFormatter {
             // update stats
             stats.update(line_cnt, word_cnt, empty_line, total_length);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
+        	JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
         return lines;
     }
@@ -120,9 +121,9 @@ public class TextFormatter {
 
             // read line by line
             while ((line = line_reader.readLine()) != null) {
-                line = line.replace('\t', ' ');
-                line = line.replaceAll("\\s+", " ");
                 // split line into words
+                line = line.replaceAll("\\s+", " ");
+                line = line.replaceAll("\t", " ");
                 if (line.isEmpty()) {
                     empty_line++;
                     continue;
@@ -176,7 +177,7 @@ public class TextFormatter {
             // update stats
             stats.update(line_cnt, word_cnt, empty_line, total_length);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
+        	JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
         return lines;
     }
