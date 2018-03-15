@@ -219,6 +219,12 @@ public class TextFormatterPanel extends JPanel {
                 input_file_chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				int val = input_file_chooser.showOpenDialog(panel);
 				if(val == JFileChooser.APPROVE_OPTION){
+					String file_name = input_file_chooser.getSelectedFile().getName();
+					String extension = file_name.substring(file_name.length()-4);
+					if (!extension.equals(".txt")) {
+						JOptionPane.showMessageDialog(panel, "ERROR: Please choose a .txt file.");
+						return;
+					}
                     format_file_btn.setEnabled(true);
                     input_field.setText(input_file_chooser.getSelectedFile().getPath());
 				}
