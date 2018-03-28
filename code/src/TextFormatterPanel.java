@@ -43,6 +43,8 @@ public class TextFormatterPanel extends JPanel {
 	private JLabel num_of_blank_lines;
 	private JLabel avg_words_per_line;
 	private JLabel avg_line_length;
+	private JLabel justify_label;
+	private JLabel space_label;
 
 	private JLabel padding;
 	private JLabel group_members;
@@ -79,7 +81,7 @@ public class TextFormatterPanel extends JPanel {
 	private void createPanel() {
 		panel = new JPanel();
 
-		panel.setLayout(new GridLayout(21, 3));
+		panel.setLayout(new GridLayout(25, 3));
 		panel.setBackground(Color.orange);
 
 		// set instruction
@@ -106,7 +108,7 @@ public class TextFormatterPanel extends JPanel {
 		panel.add(outPanel);
 
 		//line length
-		panel. add(line);
+		panel.add(line);
 		JPanel linePanel = new JPanel();
 		linePanel.setBackground(Color.orange);
 		linePanel.setLayout(new GridLayout(1, 3));
@@ -114,6 +116,7 @@ public class TextFormatterPanel extends JPanel {
 		panel.add(linePanel);
 
 		// radio button
+		panel.add(justify_label);
 		JPanel radioPanel = new JPanel(new GridLayout(1, 3));
 		radioPanel.setBackground(Color.orange);
 		radioPanel.add(left);
@@ -123,6 +126,7 @@ public class TextFormatterPanel extends JPanel {
 
 
 		//single and double space radio button
+		panel.add(space_label);
 		JPanel radioPanel1 = new JPanel(new GridLayout (1, 2));
 		radioPanel1.setBackground(Color.orange);
 		radioPanel1.add(single_space);
@@ -157,6 +161,7 @@ public class TextFormatterPanel extends JPanel {
         format_file_btn.setEnabled(false);
 
         // radio buttons and their listeners
+        justify_label = new JLabel("Choose type of justification.");
         right = new JRadioButton("Right Justified", false);
         left = new JRadioButton("Left Justified", true);
         full_justify = new JRadioButton("Full Justified", false);
@@ -169,6 +174,7 @@ public class TextFormatterPanel extends JPanel {
 		full_justify.addActionListener(radio_btn_listener);
 
 		//single and double space radio buttons
+		space_label = new JLabel("Choose single or double spacing.");
 		single_space = new JRadioButton("Single Space", true);
 		double_space = new JRadioButton("Double Space", false);
 		ActionListener radio_btn_space = new radioButtonListener1();
@@ -179,8 +185,8 @@ public class TextFormatterPanel extends JPanel {
 
 		// instruction
         instruction = new JLabel("INSTRUCTIONS");
-        instruction_content = new JLabel("Choose input and output files, size of line length, type of justification, single or double spacing.");
-        instruction_content1 = new JLabel("Then press " + "\"Format File\"");
+        instruction_content = new JLabel("Choose from the following options. Then press " + "\"Format File\"");
+        instruction_content1 = new JLabel("Choose input and ouput files.");
         // txt filter
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 
