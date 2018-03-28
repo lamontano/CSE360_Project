@@ -14,7 +14,7 @@ public class TextFormatterPanel extends JPanel {
 
     private JLabel instruction;
     private JLabel instruction_content;
-    private JLabel instruction_content1;
+    private JLabel instruction_padding;
 
     private JFileChooser input_file_chooser;
     private JLabel input;
@@ -24,12 +24,12 @@ public class TextFormatterPanel extends JPanel {
     private JLabel output;
     private JTextField output_field;
     private JLabel line;
-    private JTextField user_LineLenght;    //phase 2 update
+    private JTextField user_line_length;    //phase 2 update
     private JButton output_btn;
 
     private JRadioButton right;
     private JRadioButton left;
-    private JRadioButton full_justify;     //phase 2 update
+    private JRadioButton full;     //phase 2 update
 
     //Radio buttons for single or double spacing
     private JRadioButton single_space;
@@ -41,6 +41,7 @@ public class TextFormatterPanel extends JPanel {
 	private JLabel num_of_words_processed;
 	private JLabel num_of_lines;
 	private JLabel num_of_blank_lines;
+	private JLabel num_of_spaces_added;
 	private JLabel avg_words_per_line;
 	private JLabel avg_line_length;
 	private JLabel justify_label;
@@ -87,7 +88,7 @@ public class TextFormatterPanel extends JPanel {
 		// set instruction
 		panel.add(instruction);
 		panel.add(instruction_content);
-		panel.add(instruction_content1);
+		panel.add(instruction_padding);
 
 		// input
 		panel.add(input);
@@ -107,12 +108,12 @@ public class TextFormatterPanel extends JPanel {
 		outPanel.add(output_btn);
 		panel.add(outPanel);
 
-		//line length
+		// line length
 		panel.add(line);
 		JPanel linePanel = new JPanel();
 		linePanel.setBackground(Color.orange);
 		linePanel.setLayout(new GridLayout(1, 3));
-		linePanel.add(user_LineLenght);
+		linePanel.add(user_line_length);
 		panel.add(linePanel);
 
 		// radio button
@@ -121,11 +122,11 @@ public class TextFormatterPanel extends JPanel {
 		radioPanel.setBackground(Color.orange);
 		radioPanel.add(left);
 		radioPanel.add(right);
-		radioPanel.add(full_justify);
+		radioPanel.add(full);
 		panel.add(radioPanel);
 
 
-		//single and double space radio button
+		// spacing radio button
 		panel.add(space_label);
 		JPanel radioPanel1 = new JPanel(new GridLayout (1, 2));
 		radioPanel1.setBackground(Color.orange);
@@ -140,6 +141,7 @@ public class TextFormatterPanel extends JPanel {
 		panel.add(num_of_words_processed);
 		panel.add(num_of_lines);
 		panel.add(num_of_blank_lines);
+		panel.add(num_of_spaces_added);
 		panel.add(avg_words_per_line);
 		panel.add(avg_line_length);
 
@@ -161,20 +163,20 @@ public class TextFormatterPanel extends JPanel {
         format_file_btn.setEnabled(false);
 
         // radio buttons and their listeners
-        justify_label = new JLabel("Choose type of justification.");
+        justify_label = new JLabel("Type of justification");
         right = new JRadioButton("Right Justified", false);
         left = new JRadioButton("Left Justified", true);
-        full_justify = new JRadioButton("Full Justified", false);
+        full = new JRadioButton("Full Justified", false);
 		ActionListener radio_btn_listener = new radioButtonListener();
 		right.setBackground(Color.orange);
 		left.setBackground(Color.orange);
-		full_justify.setBackground(Color.orange);
+		full.setBackground(Color.orange);
 		right.addActionListener(radio_btn_listener);
 		left.addActionListener(radio_btn_listener);
-		full_justify.addActionListener(radio_btn_listener);
+		full.addActionListener(radio_btn_listener);
 
 		//single and double space radio buttons
-		space_label = new JLabel("Choose single or double spacing.");
+		space_label = new JLabel("Spacing");
 		single_space = new JRadioButton("Single Space", true);
 		double_space = new JRadioButton("Double Space", false);
 		ActionListener radio_btn_space = new radioButtonListener1();
@@ -186,7 +188,8 @@ public class TextFormatterPanel extends JPanel {
 		// instruction
         instruction = new JLabel("INSTRUCTIONS");
         instruction_content = new JLabel("Choose from the following options. Then press " + "\"Format File\"");
-        instruction_content1 = new JLabel("Choose input and ouput files.");
+        instruction_padding = new JLabel("");
+
         // txt filter
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 
@@ -207,15 +210,16 @@ public class TextFormatterPanel extends JPanel {
         output_file_chooser.setFileFilter(filter);
 
         /* Need to work on this */
-        //user defined line length
-        line  = new JLabel("Choose line length");
-        user_LineLenght = new JTextField(LINE_WIDTH);
+        // user defined line length
+        line = new JLabel("Line length");
+        user_line_length = new JTextField(LINE_WIDTH);
 
 
 		// statistics
 		num_of_words_processed = new JLabel("# Words processed: ");
 		num_of_lines = new JLabel("# Lines: ");
         num_of_blank_lines = new JLabel("# Blank lines removed: ");
+        num_of_spaces_added = new JLabel("# Spaces added: ");
         avg_words_per_line = new JLabel("Average words per line: ");
 		avg_line_length = new JLabel("Average line length: ");
 
@@ -230,8 +234,18 @@ public class TextFormatterPanel extends JPanel {
      */
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
+		    int line_length = 0;
 			String input_file_path = input_field.getText();
 			String output_file_path = output_field.getText();
+			if (user_line_length.getText().length() == 0) {
+                JOptionPane.showMessageDialog(panel, "ERROR: Line length not specified.");
+            } else {
+                try {
+                    line_length = Integer.parseInt(user_line_length.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(panel, "ERROR: Line length must be an integer.");
+                }
+            }
 
 			if (input_field.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(panel, "ERROR: Input file path not specified.");
@@ -244,15 +258,18 @@ public class TextFormatterPanel extends JPanel {
                 }
 
 				if (left.isSelected()) {
-					formatter.format(input_file_path, output_file_path, panel, "left");
+					formatter.format(line_length, input_file_path, output_file_path, panel, "left");
+				} else if (right.isSelected()) {
+					formatter.format(line_length, input_file_path, output_file_path, panel, "right");
 				} else {
-					formatter.format(input_file_path, output_file_path, panel, "right");
+			    	formatter.format(line_length, input_file_path, output_file_path, panel, "full");
 				}
 
 				Stats s = formatter.getStats();
 				num_of_words_processed.setText("# Words processed: " + s.words_processed());
 				num_of_lines.setText("# Lines: " + s.lines_processed());
                 num_of_blank_lines.setText("# Blank lines removed: " + s.empty_liens());
+                num_of_spaces_added.setText("# Spaces added: " + s.spaces_added());
 				avg_words_per_line.setText("Average words per line: " + s.avg_words_per_line());
 				avg_line_length.setText("Average line length: " + s.avg_line_length());
 			}
@@ -279,7 +296,7 @@ public class TextFormatterPanel extends JPanel {
                     format_file_btn.setEnabled(true);
                     input_field.setText(input_file_chooser.getSelectedFile().getPath());
 				}
-			}else{
+			} else {
                 output_file_chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 output_file_chooser.setSelectedFile(new File(".txt"));
                 int val = output_file_chooser.showSaveDialog(panel);
@@ -319,43 +336,35 @@ public class TextFormatterPanel extends JPanel {
 		public void actionPerformed(ActionEvent event) {
 			Object radioButton = event.getSource();
 
-			if (radioButton == right) 
-			{
+			if (radioButton == right) {
 				right.setSelected(true);
 				left.setSelected(false);
-				full_justify.setSelected(false);
-			} 
-			else if(radioButton == left) 
-			{
+				full.setSelected(false);
+			} else if(radioButton == left) {
 				right.setSelected(false);
 				left.setSelected(true);
-				full_justify.setSelected(false);
-			}
-			else
-			{
+				full.setSelected(false);
+			} else {
 				right.setSelected(false);
 				left.setSelected(false);
-				full_justify.setSelected(true);
+				full.setSelected(true);
 			}
 		}
 	}
+
+
 	/*
 	Radio button listener
 	 */
-	private class radioButtonListener1 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent event)
-		{
+	private class radioButtonListener1 implements ActionListener {
+		public void actionPerformed(ActionEvent event) {
 			Object radioButton1 = event.getSource();
 
-			if(radioButton1 == single_space)
-			{
+			if(radioButton1 == single_space) {
 				single_space.setSelected(true);
 				double_space.setSelected(false);
 
-			}
-			else
-			{
+			} else {
 				single_space.setSelected(false);
 				double_space.setSelected(true);
 

@@ -1,26 +1,35 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class TextFormatter {
-    private static final int COL_WIDTH = 80;
-    private Stats stats = new Stats();
+    private static int COL_WIDTH;
+    private Stats stats;
 
-    public ArrayList<String> format(String PATH, String outputDirPath, JPanel panel, String direction) {
+    public TextFormatter() {
+        this.stats = new Stats();
+    }
+
+    public ArrayList<String> format(int line_length, String PATH, String outputDirPath, JPanel panel, String direction) {
+        COL_WIDTH = line_length;
         ArrayList<String> result = new ArrayList<>();
-//        String outputFile = outputDirPath+"/output.txt";
         String outputFile = outputDirPath;
+
         if (direction.equals("left")) {
             result = leftJustify(PATH, panel, stats);
         }
         if (direction.equals("right")) {
             result = rightJustify(PATH, panel, stats);
         }
+        if (direction.equals("full")) {
+            result = fullJustify(PATH, panel, stats); // function to be implemented
+        }
         try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFile)));
-			for(int i=0;i<result.size();i++){
+			for(int i=0;i<result.size();i++) {
 				writer.write(result.get(i)+"\n");
 	        }
 			writer.close();
@@ -43,6 +52,7 @@ public class TextFormatter {
         int line_cnt = 0;
         int empty_line = 0;
         int total_length = 0;
+        int spaces_added = 0;
 
         try {
             // open text file
@@ -69,6 +79,7 @@ public class TextFormatter {
                     if (word.length() < free_space) {
                         if (sb.length() != 0) {
                             sb.append(" ");
+                            spaces_added++;
                             free_space -= 1;
                         }
                         sb.append(word);
@@ -95,7 +106,7 @@ public class TextFormatter {
             line_reader.close();
 
             // update stats
-            stats.update(line_cnt, word_cnt, empty_line, total_length);
+            stats.update(line_cnt, word_cnt, empty_line, total_length, spaces_added);
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
@@ -113,6 +124,7 @@ public class TextFormatter {
         int line_cnt = 0;
         int empty_line = 0;
         int total_length = 0;
+        int spaces_added = 0;
 
         try {
             // open text file
@@ -139,6 +151,7 @@ public class TextFormatter {
                     if (word.length() < free_space) {
                         if (sb.length() != 0) {
                             sb.append(" ");
+                            spaces_added++;
                             free_space -= 1;
                         }
                         sb.append(word);
@@ -175,11 +188,16 @@ public class TextFormatter {
             line_reader.close();
 
             // update stats
-            stats.update(line_cnt, word_cnt, empty_line, total_length);
+            stats.update(line_cnt, word_cnt, empty_line, total_length, spaces_added);
         } catch (IOException e) {
         	JOptionPane.showMessageDialog(panel, "ERROR: Input file not found");
         }
         return lines;
+    }
+
+    private ArrayList<String> fullJustify(String PATH, JPanel panel, Stats stats) {
+        ArrayList<String> results = new ArrayList<>();
+        return results;
     }
 
     public Stats getStats() {
