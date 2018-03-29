@@ -67,7 +67,7 @@ public class TextFormatterPanel extends JPanel {
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		add(panel);
 		setBackground(Color.orange);
-		setPreferredSize(new Dimension(500, 500));
+		setPreferredSize(new Dimension(500, 600));
 	}
 
 
