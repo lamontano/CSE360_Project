@@ -1,12 +1,11 @@
 # TextFormatter
-
-
 ## Introduction
 TextFormatter allows the user to format a text file (.txt) of any size in a user-defined line length. The system allows the user to justify the file in three ways:
 - Left justification
 - Right justification
 - Full justification
 Besides, the user has the option to output the formatted text in either single spacing or double spacing. After the file is processed, the system will provide the following analysis.
+
 |            Analysis           |                           Description                          |
 |:-----------------------------:|:--------------------------------------------------------------:|
 |   Number of words processed   |    Total number of words being processed in the input file.    |
