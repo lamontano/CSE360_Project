@@ -1,0 +1,45 @@
+Jian Kang
+Venkata Maganti
+Luis Montano
+Carlos Paz
+
+
+TEST CASE DESCRIPTION:
+
+For input 1, we have the Full-Justified and Single Space settings toggled on. We have a line length of 10
+
+
+INPUT FILE:
+
+It's never been done before and that's kind of the spirit everybody's taking it in. The other filmmakers aren't used to getting actors from other movies that other filmmakers have cast, certain plot lines that are 
+
+connected or certain locations that are connected, but I think ... everyone was on board for it and thinks that it's fun. Primarily because we've always remained consistent saying that the movie that we are making comes 
+
+first. All of the connective tissue, all of that stuff is fun and is going to be very important if you want it to be. If the fans want to look further and find connections, then they're there. There are a few big ones 
+
+obviously, that hopefully the mainstream audience will able to follow as well. But ... the reason that all the filmmakers are on board is that their movies need to stand on their own. They need to have a fresh vision, a
+
+ unique tone, and the fact that they can interconnect if you want to follow those breadcrumbs is a bonus.
+
+
+EXPECTED OUTPUT FILE:
+
+It's never been done before and that's kind of the spirit everybody's taking it in. The other filmmakers aren't used to getting actors from other movies that other filmmakers have cast, certain plot lines that are
+
+connected or certain locations that are connected, but I think ... everyone was on board for it and thinks that it's fun. Primarily because we've always remained consistent saying that the movie that we are making comes
+
+first. All of the connective tissue, all of that stuff is fun and is going to be very important if you want it to be. If the fans want to look further and find connections, then they're there. There are a few big ones
+
+obviously, that hopefully the mainstream audience will able to follow as well. But ... the reason that all the filmmakers are on board is that their movies need to stand on their own. They need to have a fresh vision, a
+
+unique tone, and the fact that they can interconnect if you want to follow those breadcrumbs is a bonus.
+
+
+EXPECTED ANALYSIS:
+
+No of Words processed: 195
+No of Lines: 122
+No of Blank lines removed: 5
+No of Spaces Added: 73
+Average words per line: 1.598360655737705
+Average line length: 9.967213114754099
