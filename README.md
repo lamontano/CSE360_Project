@@ -4,6 +4,7 @@ TextFormatter allows the user to format a text file (.txt) of any size in a user
 - Left justification
 - Right justification
 - Full justification
+
 Besides, the user has the option to output the formatted text in either single spacing or double spacing. After the file is processed, the system will provide the following analysis.
 
 |            Analysis           |                           Description                          |
@@ -17,4 +18,6 @@ Besides, the user has the option to output the formatted text in either single s
 
 
 ## How to Install
-To use TextFormatter, download [TextFormatter.jar](https://github.com/lamontano/CSE360_Project/blob/master/TextFormatter.jar). Before you use TextFormatter, please make sure you have Java installed on your computer. If you are using Mac OS X, Linux or UNIX, Java should be pre-installed in the operating system. If you are using any version of Windows, you have to install Java by yourself. About how to install Java on your operating system, please refer to [this website](https://github.com/lamontano/CSE360_Project/blob/master/TextFormatter.jar).
+Before you start using TextFormatter, please make sure you have Java installed on your computer. If you are using Mac OS X, Linux or UNIX, Java should be pre-installed in the operating system. If you are using any version of Windows, you have to install Java by yourself. About how to install Java on your operating system, please refer to [this website](https://github.com/lamontano/CSE360_Project/blob/master/TextFormatter.jar).
+
+To install TextFormatter, please download the compiled [TextFormatter.jar](https://github.com/lamontano/CSE360_Project/blob/master/TextFormatter.jar) file in the repository. Simply open the file to use it.
