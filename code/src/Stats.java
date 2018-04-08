@@ -15,9 +15,8 @@ public class Stats {
         this.words_processed = word_cnt;
         this.empty_lines = empty_line;
         this.spaces_added = spaces_added;
-        this.avg_words_per_line = (double)word_cnt / line_cnt;
-        this.avg_line_length = (double)total_length / line_cnt;
-
+        this.avg_words_per_line = (double) word_cnt / line_cnt;
+        this.avg_line_length = (double) total_length / line_cnt;
     }
 
     public int lines_processed() {

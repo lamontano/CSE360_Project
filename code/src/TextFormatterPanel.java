@@ -167,23 +167,23 @@ public class TextFormatterPanel extends JPanel {
         right = new JRadioButton("Right Justified", false);
         left = new JRadioButton("Left Justified", true);
         full = new JRadioButton("Full Justified", false);
-		ActionListener radio_btn_listener = new radioButtonListener();
+		ActionListener radio_btn_justify_listener = new radioButtonListener();
 		right.setBackground(Color.orange);
 		left.setBackground(Color.orange);
 		full.setBackground(Color.orange);
-		right.addActionListener(radio_btn_listener);
-		left.addActionListener(radio_btn_listener);
-		full.addActionListener(radio_btn_listener);
+		right.addActionListener(radio_btn_justify_listener);
+		left.addActionListener(radio_btn_justify_listener);
+		full.addActionListener(radio_btn_justify_listener);
 
 		//single and double space radio buttons
 		space_label = new JLabel("Spacing");
 		single_space = new JRadioButton("Single Space", true);
 		double_space = new JRadioButton("Double Space", false);
-		ActionListener radio_btn_space = new radioButtonListener1();
+		ActionListener radio_btn_space_listener = new radioButtonListener1();
 		single_space.setBackground(Color.orange);
 		double_space.setBackground(Color.orange);
-		single_space.addActionListener(radio_btn_space);
-		double_space.addActionListener(radio_btn_space);
+		single_space.addActionListener(radio_btn_space_listener);
+		double_space.addActionListener(radio_btn_space_listener);
 
 		// instruction
         instruction = new JLabel("INSTRUCTIONS");
@@ -257,13 +257,37 @@ public class TextFormatterPanel extends JPanel {
                     return;
                 }
 
-				if (left.isSelected()) {
-					formatter.format(line_length, input_file_path, output_file_path, panel, "left");
-				} else if (right.isSelected()) {
-					formatter.format(line_length, input_file_path, output_file_path, panel, "right");
-				} else {
-			    	formatter.format(line_length, input_file_path, output_file_path, panel, "full");
+                String direction = "left";
+			    String spacing = "single";
+
+			    // set justification
+			    if (left.isSelected()) {
+			    	direction = "left";
 				}
+				if (right.isSelected()) {
+			    	direction = "right";
+				}
+				if (full.isSelected()) {
+			    	direction = "full";
+				}
+
+				// set spacing
+				if (single_space.isSelected()) {
+			    	spacing = "single";
+				}
+				if (double_space.isSelected()) {
+			    	spacing = "double";
+				}
+
+				formatter.format(panel, line_length, input_file_path, output_file_path, direction, spacing);
+
+//				if (left.isSelected()) {
+//					formatter.format(line_length, input_file_path, output_file_path, panel, "left");
+//				} else if (right.isSelected()) {
+//					formatter.format(line_length, input_file_path, output_file_path, panel, "right");
+//				} else {
+//			    	formatter.format(line_length, input_file_path, output_file_path, panel, "full");
+//				}
 
 				Stats s = formatter.getStats();
 				num_of_words_processed.setText("# Words processed: " + s.words_processed());
@@ -336,15 +360,18 @@ public class TextFormatterPanel extends JPanel {
 		public void actionPerformed(ActionEvent event) {
 			Object radioButton = event.getSource();
 
+			// set justification
 			if (radioButton == right) {
 				right.setSelected(true);
 				left.setSelected(false);
 				full.setSelected(false);
-			} else if(radioButton == left) {
+			}
+			if (radioButton == left) {
 				right.setSelected(false);
 				left.setSelected(true);
 				full.setSelected(false);
-			} else {
+			}
+			if (radioButton == full){
 				right.setSelected(false);
 				left.setSelected(false);
 				full.setSelected(true);
@@ -358,13 +385,14 @@ public class TextFormatterPanel extends JPanel {
 	 */
 	private class radioButtonListener1 implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			Object radioButton1 = event.getSource();
+			Object radioButton = event.getSource();
 
-			if(radioButton1 == single_space) {
+			if (radioButton == single_space) {
 				single_space.setSelected(true);
 				double_space.setSelected(false);
 
-			} else {
+			}
+			if (radioButton == double_space){
 				single_space.setSelected(false);
 				double_space.setSelected(true);
 
